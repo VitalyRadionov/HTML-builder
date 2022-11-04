@@ -3,13 +3,11 @@ const path = require('path');
 const routToFiles = path.join(__dirname, '/styles');
 const bundle = fs.createWriteStream(path.join(__dirname, '/project-dist', 'bundle.css'));
 
-// const routToFilesCopy = path.join(__dirname, '/files-copy');
+mergeStylesCSS();
 
-copyDir();
-
-function copyDir() {
-  fs.readdir(routToFiles, { withFileTypes: true }, (error, filesCSS) => {
-    if (error) {
+function mergeStylesCSS() {
+  fs.readdir(routToFiles, { withFileTypes: true }, (err, filesCSS) => {
+    if (err) {
       console.log("\x1b[33m", `directory 'styles' does not exist`, '\x1b[0m');
     }
     else {
@@ -21,7 +19,6 @@ function copyDir() {
         fs.readFile(path.join(routToFiles, element.name), "utf8", (err, fileContent) => {
           if (err) throw err;
           else {
-            // console.log(fileContent);
             bundle.write(`${fileContent}\n`);
           }
         });
