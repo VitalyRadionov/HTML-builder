@@ -4,7 +4,7 @@ const path = require('path');
 fs.readdir(path.join(__dirname, './secret-folder'), { withFileTypes: true }, (error, fileContent) => {
   if (error) throw error;
   let arrFiles = fileContent.filter(element => element.isFile());
-  console.log(arrFiles);
+
   arrFiles.forEach((element) => {
     fs.stat(path.join(__dirname, './secret-folder', element.name), (error, fileContent) => {
       if (error) throw error;
