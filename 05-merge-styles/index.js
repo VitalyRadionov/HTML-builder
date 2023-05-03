@@ -9,16 +9,13 @@ fs.readdir(routToFiles, { withFileTypes: true }, (err, filesCSS) => {
   }
   else {
     console.log('build...');
-    let arrFilesCSS = filesCSS.filter(element => path.extname(element.name) == '.css');
-    console.log(arrFilesCSS);
-
-    arrFilesCSS.forEach(element => {
-      fs.readFile(path.join(routToFiles, element.name), "utf8", (err, fileContent) => {
-        if (err) throw err;
-        else {
-          bundle.write(`${fileContent}\n`);
-        }
-      });
+    filesCSS.filter((element) => {
+      if (path.extname(element.name) === '.css') {
+        fs.readFile(path.join(routToFiles, element.name), "utf8", (err, fileContent) => {
+          if (err) throw err;
+          else bundle.write(`${fileContent}\n`);
+        });
+      }
     });
   }
 });
