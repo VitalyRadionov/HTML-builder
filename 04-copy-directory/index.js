@@ -23,9 +23,8 @@ function copyDir() {
         if (err) throw err;
         else {
           let arrFiles = fileContent.filter(element => element.isFile());
-          // console.log(arrFiles);
           let arrFilesCopy = filesCopyContent.filter(element => arrFiles.find(item => item.name == element.name) == undefined);
-          // console.log(arrFilesCopy);
+
           arrFiles.forEach((element) => {
             fs.copyFile(path.join(routToFiles, element.name), path.join(routToFilesCopy, element.name), (err) => {
               if (err) throw err;
@@ -33,7 +32,6 @@ function copyDir() {
             });
           });
           if (arrFilesCopy.length) {
-            // console.log(arrFilesCopy);
             arrFilesCopy.forEach(element => {
               fs.unlink(path.join(routToFilesCopy, element.name), (err) => {
                 if (err) throw err;
