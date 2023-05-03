@@ -22,8 +22,8 @@ function copyDir() {
       fs.readdir(routToFiles, { withFileTypes: true }, (err, fileContent) => {
         if (err) throw err;
         else {
-          let arrFiles = fileContent.filter(element => element.isFile());
-          let arrFilesCopy = filesCopyContent.filter(element => arrFiles.find(item => item.name == element.name) == undefined);
+          const arrFiles = fileContent.filter(element => element.isFile());
+          const arrFilesCopy = filesCopyContent.filter(element => arrFiles.find(item => item.name == element.name) == undefined);
 
           arrFiles.forEach((element) => {
             fs.copyFile(path.join(routToFiles, element.name), path.join(routToFilesCopy, element.name), (err) => {
@@ -31,6 +31,7 @@ function copyDir() {
               else { console.log(`${element.name} was copied`); }
             });
           });
+
           if (arrFilesCopy.length) {
             arrFilesCopy.forEach(element => {
               fs.unlink(path.join(routToFilesCopy, element.name), (err) => {
